@@ -25,9 +25,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Very cool course</h1>
-        <button onClick={this.switchNameHandler.bind(this, "new name")}>Switch name</button>
+        <button onClick={() => this.switchNameHandler("new name")}>Switch name</button>
         {this.state.persons.map(person => 
-          <Person click={this.switchNameHandler.bind(this, "new name")} key={person.name} name={person.name} age={person.age} />
+          <Person click={() => this.switchNameHandler("another name")} key={person.name} name={person.name} age={person.age} />
         )}
       </div>
     );
