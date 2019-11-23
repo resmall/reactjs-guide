@@ -18,13 +18,24 @@ class App extends Component {
     });
   };
 
-  nameChangedHandler = event => {
+  nameChangedHandler = (event, id) => {
+    // We could have passed the index directly, this is just 
+    // to show how it could've been done in case we were working 
+    // with ids.
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    let person = {...this.state.persons[personIndex]};
+    person.name = event.target.value;
+
+    // We're creating a copy of the array, so not to use its reference
+    // to the state directly, which is a bad practice.
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        { name: "Tiago ", age: "31" },
-        { name: event.target.value, age: "22" },
-        { name: "José", age: "0" }
-      ]
+      persons: persons
     });
   };
 
@@ -53,7 +64,8 @@ class App extends Component {
               key={person.id}
               name={person.name}
               age={person.age}
-              click={() => this.deletePerson(index)} />
+              click={() => this.deletePerson(index)}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           )}
         </div>
       );
