@@ -41,40 +41,48 @@ class App extends Component {
 
   render() {
     const style = {
-      border: 'solid 1px black',
-      padding: '20px',
-      backgroundColor: 'white'
+      border: "solid 1px black",
+      padding: "20px",
+      backgroundColor: "white"
     };
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          >
+            My hobbies: fishing
+          </Person>
+          <Person
+            changed={this.nameChangedHandler}
+            click={() => this.switchNameHandler("another name")}
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+          >
+            My hobbies: hunting
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          >
+            My hobbies: videogames
+          </Person>
+        </div>
+      );
+    }
 
     return (
       <div className="App">
         <h1>Very cool course</h1>
-        <button style={style} onClick={this.handleTogglePersons}>Toggle Persons</button>
+        <button style={style} onClick={this.handleTogglePersons}>
+          Toggle Persons
+        </button>
 
-        {this.state.showPersons ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            >
-              My hobbies: fishing
-            </Person>
-            <Person
-              changed={this.nameChangedHandler}
-              click={() => this.switchNameHandler("another name")}
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-            >
-              My hobbies: hunting
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-            >
-              My hobbies: videogames
-            </Person>
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
   }
