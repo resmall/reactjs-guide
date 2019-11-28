@@ -4,13 +4,13 @@ import Person from "./Person/Person";
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: ${props => props.alt ? 'red' : 'green'};
   color: white;
   border: solid 2px black;
   padding: 20px;
   font: inherit;
   :hover {
-    background-color: lightgreen;
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen' };
     color: black;
   }
 `
@@ -92,7 +92,7 @@ class App extends Component {
         <div className="App">
           <h1>Very cool course</h1>
           <p className={classes.join(' ')}>This actually works!!!</p>
-          <StyledButton onClick={this.handleTogglePersons}>
+          <StyledButton alt={this.state.showPersons} onClick={this.handleTogglePersons}>
             Toggle Persons
           </StyledButton>
 
