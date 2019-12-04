@@ -1,19 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Persons from "../components/Persons/Persons";
-import styled from 'styled-components';
-
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-  color: white;
-  border: solid 2px black;
-  padding: 20px;
-  font: inherit;
-  :hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen' };
-    color: black;
-  }
-`
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   state = {
@@ -74,24 +62,12 @@ class App extends Component {
       )
     }
 
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push('red');
-    }
-
-    if (this.state.persons.length <= 1) {
-      classes.push('bold');
-    }
-
-
     return (
         <div className="App">
-          <h1>Very cool course</h1>
-          <p className={classes.join(' ')}>This actually works!!!</p>
-          <StyledButton alt={this.state.showPersons} onClick={this.handleTogglePersons}>
-            Toggle Persons
-          </StyledButton>
-
+          <Cockpit 
+          showPersons={this.state.showPersons} 
+          persons={this.state.persons} 
+          click={this.handleTogglePersons} />
           {persons}
         </div>
     );
