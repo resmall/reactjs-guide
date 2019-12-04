@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Person from "../components/Persons/Person/Person";
+import Persons from "../components/Persons/Persons";
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
@@ -66,16 +66,12 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => 
-            <Person
-              key={person.id}
-              name={person.name}
-              age={person.age}
-              click={() => this.deletePerson(index)}
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
-          )}
+          <Persons 
+            persons={this.state.persons} 
+            click={this.deletePerson}
+            changed={this.nameChangedHandler} />
         </div>
-      );
+      )
     }
 
     const classes = [];
